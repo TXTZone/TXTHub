@@ -244,7 +244,15 @@ footer {
     © 2026 TXTHub
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL = "https://snaawhnhclbknsnzfgso.supabase.co";
+const SUPABASE_KEY = sb_publishable_KTpFHE2I5ckUF_mJ9s8HXg__DMYSRdh ;
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 function searchFiles() {
 
