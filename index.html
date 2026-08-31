@@ -14,14 +14,14 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #0f1117;
-    color: #fff;
+    color: white;
 }
 
 header {
+    padding: 35px 20px;
+    text-align: center;
     background: #171a23;
     border-bottom: 1px solid #292d38;
-    padding: 25px 20px;
-    text-align: center;
 }
 
 header h1 {
@@ -31,24 +31,6 @@ header h1 {
 
 header p {
     color: #aeb4c0;
-}
-
-.auth {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-button,
-.download {
-    border: 0;
-    border-radius: 9px;
-    padding: 11px 16px;
-    background: #5865f2;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
 }
 
 .search {
@@ -105,46 +87,16 @@ button,
 .download {
     display: block;
     text-align: center;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.75);
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.modal-box {
-    width: 100%;
-    max-width: 420px;
-    background: #181b24;
-    border: 1px solid #292e3a;
-    border-radius: 15px;
-    padding: 25px;
-}
-
-.modal-box input {
-    width: 100%;
-    margin: 8px 0;
-    padding: 13px;
-    border-radius: 8px;
-    border: 1px solid #343947;
-    background: #10131a;
+    padding: 12px;
+    border-radius: 9px;
+    background: #5865f2;
     color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.modal-box button {
-    width: 100%;
-    margin-top: 10px;
-}
-
-.close {
-    float: right;
-    cursor: pointer;
-    color: #aeb4c0;
+.download:hover {
+    background: #4752c4;
 }
 
 footer {
@@ -159,18 +111,14 @@ footer {
 <body>
 
 <header>
-    <div class="auth">
-        <button onclick="openAuth()">Zaloguj / Rejestracja</button>
-    </div>
-
     <h1>TXTHub</h1>
     <p>Darmowa biblioteka plików TXT</p>
 </header>
 
 <div class="search">
     <input
-        id="searchInput"
         type="text"
+        id="searchInput"
         placeholder="Szukaj plików..."
         oninput="searchFiles()"
     >
@@ -186,8 +134,7 @@ footer {
     <h3>Better Bed Wars</h3>
 
     <p>
-        Popularny texture pack do Minecraft BedWars.
-        Lepsza czytelność i wygodniejsza gra.
+        Testowy plik Better Bed Wars dostępny do pobrania.
     </p>
 
     <div class="info">
@@ -208,46 +155,16 @@ footer {
 
 </main>
 
-<div class="modal" id="authModal">
-    <div class="modal-box">
-
-        <span class="close" onclick="closeAuth()">✕</span>
-
-        <h2 id="authTitle">Logowanie</h2>
-
-        <input
-            id="email"
-            type="email"
-            placeholder="Email"
-        >
-
-        <input
-            id="password"
-            type="password"
-            placeholder="Hasło"
-        >
-
-        <button onclick="login()">
-            Zaloguj
-        </button>
-
-        <button onclick="register()">
-            Załóż konto
-        </button>
-
-        <p id="authMessage"></p>
-
-    </div>
-</div>
-
 <footer>
     © 2026 TXTHub
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 const SUPABASE_URL = "https://snaawhnhclbknsnzfgso.supabase.co";
-const SUPABASE_KEY = "sb_publishable_KTpFHE2I5ckUF_mJ9s8HXg__DMYSRdh" ;
+
+const SUPABASE_KEY = "sb_publishable_KTpFHE2I5ckUF_mJ9s8HXg__DMYSRdh";
 
 const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
@@ -255,45 +172,24 @@ const supabaseClient = window.supabase.createClient(
 );
 
 function searchFiles() {
-
     const search =
-        document
-        .getElementById("searchInput")
+        document.getElementById("searchInput")
         .value
         .toLowerCase();
 
-    document
-    .querySelectorAll(".card")
-    .forEach(card => {
+    const cards =
+        document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        const text =
+            card.innerText.toLowerCase();
 
         card.style.display =
-            card.innerText
-            .toLowerCase()
-            .includes(search)
+            text.includes(search)
             ? "block"
             : "none";
-
     });
 }
-
-function openAuth() {
-    document.getElementById("authModal").style.display = "flex";
-}
-
-function closeAuth() {
-    document.getElementById("authModal").style.display = "none";
-}
-
-function login() {
-    document.getElementById("authMessage").textContent =
-        "Logowanie podłączymy w następnym kroku.";
-}
-
-function register() {
-    document.getElementById("authMessage").textContent =
-        "Rejestrację podłączymy w następnym kroku.";
-}
-
 </script>
 
 </body>
